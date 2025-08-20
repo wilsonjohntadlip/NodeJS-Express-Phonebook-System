@@ -9,15 +9,14 @@ import { getContacts,
 const router = express.Router();
 
 // Define the route using the router instance
-router.get('/', getContacts);
+router.route('/')
+  .get(getContacts)        // GET /api/contacts
+  .post(createContact);    // POST /api/contacts
 
-router.post('/:id', createContact);
-
-router.get('/:id', getContact);
-
-router.put('/:id', updateContact);
-
-router.delete('/:id', deleteContact);
+router.route('/:id')
+  .get(getContact)         // GET /api/contacts/:id
+  .put(updateContact)      // PUT /api/contacts/:id
+  .delete(deleteContact);  // DELETE /api/contacts/:id
 
 
 // Export the router to use in server.js

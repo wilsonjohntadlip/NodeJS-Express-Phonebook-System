@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import contactRoutes from './routes/contactRoutes.js';
+import errorHandler from './middleware/errorHandler.js'
 
 
 // Initialize dotenv to load environment variables from the .env file
@@ -11,7 +12,9 @@ const app = express();
 
 const PORT = process.env.PORT || 4080;
 
+app.use(express.json());
 app.use('/api/contacts', contactRoutes);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
