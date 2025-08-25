@@ -1,4 +1,5 @@
 import express from 'express';
+import validateToken from '../middleware/validateTokenHandler.js';
 import { 
     registerUser, 
     loginUser, 
@@ -14,6 +15,6 @@ router.route('/login')
   .post(loginUser);  // POST /api/users/login
 
 router.route('/currentUser')
-  .post(currentUser);   // POST /api/users/currentUser
+  .get(validateToken, currentUser);   // POST /api/users/currentUser
 
 export default router;
